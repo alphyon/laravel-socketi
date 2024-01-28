@@ -42,4 +42,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * @param int $groupId
+     * @return bool
+     */
+    public function canJoinGroup(int $groupId):bool
+    {
+        return $this->group_id === $groupId;
+    }
 }

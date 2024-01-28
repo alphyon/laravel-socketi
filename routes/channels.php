@@ -20,3 +20,9 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 Broadcast::channel('public',fn()=>true);
 
 Broadcast::channel('private.{id}',fn($user,$id)=>(int)$user->id === (int)$id);
+
+Broadcast::channel('presence.{groupId}',function ($user,int $groupId){
+    if($user->canJoinGroup($groupId)){
+        return ['id'=>$user->id,'name'=>$user->name];
+    }
+});
